@@ -1,5 +1,5 @@
 {% set name = "bertha" %}
-{% set version = "1.0.0" %}
+{% set version = "1.1.0" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://gitlab.com/cph-tum/{{ name }}/-/archive/v{{ version }}/{{ name }}-v{{ version }}.tar.gz
-  sha256: 76548070cd72786304fa691d8d0c03deb08a67a97e4a55a7ff5bb66f971feb13
+  sha256: 740341ed525f03c27e5879c633c4b51398b0d95f31a9465bc539d3c0c34f5352
 
 build:
   number: 0
