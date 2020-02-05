@@ -19,8 +19,6 @@ requirements:
     - cmake
     - make             # [unix]
     - ninja            # [win]
-    - python
-    - pip
     - swig
   host:
     - python
@@ -29,8 +27,23 @@ requirements:
     - python
 
 test:
+  requires:
+    - {{ compiler('cxx') }}
+    - cmake
+    - make             # [unix]
+    - ninja            # [win]
+  files:
+    - export_test/CMakeLists.txt
+    - export_test/cmake_export_test.cpp
   commands:
     - python -c "import bertha.core as b; d = b.device(1, 2); d.get_length()"
+    - mkdir -p build && cd build
+    - cmake -G "Ninja" -DCMAKE_BUILD_TYPE=Release ../export_test     # [win]
+    - cmake --build . --config Release                               # [win]
+    - cmake_export_test                                              # [win]
+    - cmake -DCMAKE_BUILD_TYPE=Release ../export_test                # [unix]
+    - cmake --build .                                                # [unix]
+    - ./cmake_export_test                                            # [unix]
 
 about:
   home: https://gitlab.com/cph-tum/bertha
